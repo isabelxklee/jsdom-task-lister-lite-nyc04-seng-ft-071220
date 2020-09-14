@@ -1,21 +1,26 @@
 document.addEventListener("DOMContentLoaded", () => {
-  let inputField = document.getElementById("new-task-description")
+  let newTask = document.getElementById("new-task-description")
+  let newUser = document.getElementById("new-user")
   let taskForm = document.getElementById("create-task-form")
-  let list = document.getElementById("tasks")
+  let unorderedList = document.getElementById("tasks")
   
   taskForm.addEventListener("submit", (event) => {
     event.preventDefault()
+
     let taskItem = document.createElement("li")
-    taskItem.innerText = inputField.value
+    taskItem.innerText = `"${newTask.value}" by ${newUser.value}`
+
     let deleteButton = document.createElement("button")
     deleteButton.innerText = "Delete"
-    taskItem.append(deleteButton)
-    list.append(taskItem)
+
+    let lineBreak = document.createElement("br")
+
+    taskItem.append(lineBreak, deleteButton)
+    unorderedList.append(taskItem)
 
     deleteButton.addEventListener("click", () => {
       taskItem.remove()
     })
   })
 
-
-});
+})
