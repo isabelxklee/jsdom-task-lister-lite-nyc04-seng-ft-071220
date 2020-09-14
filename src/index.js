@@ -6,8 +6,15 @@ document.addEventListener("DOMContentLoaded", () => {
   taskForm.addEventListener("submit", (event) => {
     event.preventDefault()
     let taskItem = document.createElement("li")
-    taskItem.innerText = inputField.value 
+    taskItem.innerText = inputField.value
+    let deleteButton = document.createElement("button")
+    deleteButton.innerText = "Delete"
+    taskItem.append(deleteButton)
     list.append(taskItem)
+
+    deleteButton.addEventListener("click", () => {
+      taskItem.remove()
+    })
   })
 
 
