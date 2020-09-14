@@ -1,5 +1,4 @@
-let taskID = 1
-let userID = 1
+let globalID = 0
 
 document.addEventListener("DOMContentLoaded", () => {
   let newTask = document.getElementById("new-task-description")
@@ -14,20 +13,22 @@ document.addEventListener("DOMContentLoaded", () => {
     event.preventDefault()
 
     let newTaskContainer = document.createElement("div")
+    newTaskContainer.id = `${globalID}`
 
     let taskInfo = document.createElement("li")
     taskInfo.innerText = newTask.value
-    taskInfo.id = `task-${taskID ++}`
+    taskInfo.id = `task-${globalID}`
 
     let userInfo = document.createElement("li")
     userInfo.innerText = newUser.value
-    userInfo.id = `user-${userID ++}`
+    userInfo.id = `user-${globalID}`
 
     let deleteButton = document.createElement("button")
     deleteButton.innerText = "Delete"
 
     let editButton = document.createElement("button")
     editButton.innerText = "Edit"
+    editButton.id = `${globalID ++}`
 
     let lineBreak = document.createElement("br")
 
@@ -41,25 +42,24 @@ document.addEventListener("DOMContentLoaded", () => {
       newTaskContainer.remove()
     })
 
-    editButton.addEventListener("click", () => {
-      editTask.value = taskInfo.innerText
-      editUser.value = userInfo.innerText
+    editButton.addEventListener("click", (event) => {
+      selectedID = editButton.id
 
-      let currentTaskID = taskInfo.id
-      let currentUserID = userInfo.id
-      
-      console.log(currentTaskID)
-      console.log(currentUserID)
+      selectedTask = document.getElementById(`task-${selectedID}`)
+      selectedUser = document.getElementById(`user-${selectedID}`)
 
-      editTaskForm.addEventListener("submit", (event) => {
-        event.preventDefault()
-
-        console.log(currentTaskID)
-        console.log(currentUserID)
-        
-        taskInfo.innerText = editTask.value
-        userInfo.innerText = editUser.value
-      })
+      editTask.value = selectedTask.innerText
+      editUser.value = selectedUser.innerText
     })
+  })
+
+  editTaskForm.addEventListener("submit", (event) => {
+    event.preventDefault()
+
+    selectedTask = document.getElementById(`task-${selectedID}`)
+    selectedUser = document.getElementById(`user-${selectedID}`)
+
+    selectedTask.innerText = editTask.value
+    selectedUser.innerText = editUser.value
   })
 })
