@@ -57,8 +57,8 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log(currentTaskID)
         console.log(currentUserID)
         
-        // taskInfo.innerText = editTask.value
-        // userInfo.innerText = editUser.value
+        taskInfo.innerText = editTask.value
+        userInfo.innerText = editUser.value
       })
     })
   })
